@@ -1,0 +1,8 @@
+aElo: 実ELO
+wElo: 欲ELO
+div: ディビジョン
+lpsGame: 各マッチのLP
+aLps: 実LP
+text: ELOとマッチごとに獲得している LP を挿入して、\n必要な勝利の概算値を取得する
+btn: 計算
+needW: 必要な勝利

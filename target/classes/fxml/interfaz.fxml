@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:id="root" hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="875.0" style="-fx-background-color: black;" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="15.0" prefWidth="110.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="20.0" prefWidth="160.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="15.0" prefWidth="110.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="180.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="20.0" prefWidth="180.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="10.0" prefWidth="70.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" percentHeight="25.0" prefHeight="50.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="-Infinity" minHeight="10.0" percentHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="10.0" percentHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="10.0" percentHeight="25.0" prefHeight="50.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ChoiceBox fx:id="eloActual" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" />
+      <ChoiceBox fx:id="divisionActual" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label fx:id="lbl1" contentDisplay="CENTER" text="ACTUAL ELO" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl2" contentDisplay="CENTER" text="DIVISION" textFill="WHITE" GridPane.rowIndex="1">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl3" text="WISHED ELO" textFill="WHITE" GridPane.columnIndex="2">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl4" text="DIVISION" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="eloDeseado" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="3" />
+      <ChoiceBox fx:id="divisionDeseada" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <TextField fx:id="lpsGame" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label fx:id="lbl5" text="LP PER GAME" textFill="WHITE" GridPane.rowIndex="2">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="boton" disable="true" mnemonicParsing="false" onAction="#calcularWins" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;" text="CALCULATE" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets bottom="10.0" right="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Label fx:id="lbl7" text="ACTUAL LPs" textFill="WHITE" GridPane.rowIndex="3">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lpActuales" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+         <children>
+            <Spinner fx:id="langSelector" prefHeight="25.0" prefWidth="150.0" />
+            <Button fx:id="themeButton" mnemonicParsing="false" onAction="#changeTheme" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Text fx:id="lbl8" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert your elo and the LPs you're winning per game to get an aprox value of the wins you need" wrappingWidth="510.0" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <HBox fx:id="cajita" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="210.0" spacing="15.0" style="-fx-background-color: yellow; -fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+         <children>
+            <Label fx:id="lbl6" alignment="CENTER" text="NECESSARY WINS">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="winsLabel" text="?">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</GridPane>
