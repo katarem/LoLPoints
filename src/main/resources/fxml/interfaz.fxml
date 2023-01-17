@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="root" hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="875.0" style="-fx-background-color: black;" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane id="root" fx:id="root" hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="875.0" stylesheets="@../darkTheme.css" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="15.0" prefWidth="110.0" />
       <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="-Infinity" percentWidth="20.0" prefWidth="160.0" />
@@ -31,12 +31,12 @@
    <children>
       <ChoiceBox fx:id="eloActual" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" />
       <ChoiceBox fx:id="divisionActual" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label fx:id="lbl1" contentDisplay="CENTER" text="ACTUAL ELO" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lbl1" contentDisplay="CENTER" text="ACTUAL ELO" textAlignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl2" contentDisplay="CENTER" text="DIVISION" textFill="WHITE" GridPane.rowIndex="1">
+      <Label fx:id="lbl2" contentDisplay="CENTER" text="DIVISION" GridPane.rowIndex="1">
          <font>
             <Font size="15.0" />
          </font>
@@ -81,6 +81,7 @@
       <TextField fx:id="lpActuales" prefHeight="25.0" prefWidth="500.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <children>
+            <Label fx:id="resLabel" prefHeight="22.0" prefWidth="166.0" textFill="WHITE" />
             <Spinner fx:id="langSelector" prefHeight="25.0" prefWidth="150.0" />
             <Button fx:id="themeButton" mnemonicParsing="false" onAction="#changeTheme" />
          </children>
@@ -107,6 +108,11 @@
             </Label>
          </children>
       </HBox>
+      <Text fx:id="checkText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="170.93664455413818" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

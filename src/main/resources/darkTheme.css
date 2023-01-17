@@ -1,0 +1,15 @@
+.root {
+    -fx-background-color: black;
+}
+
+GridPane > * {
+    -fx-text-fill: white;
+}
+
+TextField{
+    -fx-text-fill: black;
+}
+
+Button{
+    -fx-text-fill: black;
+}

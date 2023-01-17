@@ -10,4 +10,4 @@ LoLPoints is an app which will allow you to count how many wins you need to go f
 
 ## Usage
 
-You will only have to download the jar file from the [releases page](https://github.com/katarem/LoLPoints/releases/). Once you downloaded it, just double click it and you will have it open. You will need Java installed for this, if you haven't, you can just download it from [here](https://www.java.com/en/download/).
+You will only have to download the jar file from the [releases page](https://github.com/katarem/LoLPoints/releases/). Once you downloaded it, just double click it and you will have it open. You will need Java installed for this, if you haven't, you can just download it from [here](https://www.oracle.com/es/java/technologies/downloads/).

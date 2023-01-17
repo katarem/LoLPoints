@@ -8,7 +8,7 @@ public enum Elos {
     PLATINUM(1600),
     DIAMOND(2000),
     MASTER(2400),
-    GRANDMASTER(2900),
+    GRANDMASTER(2800),
     CHALLENGER(3200);
 
     public int elo;
