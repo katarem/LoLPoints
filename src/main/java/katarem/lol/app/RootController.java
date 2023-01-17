@@ -147,8 +147,6 @@ public class RootController implements Initializable{
 
         root.widthProperty().addListener((observable, oldValue, newValue) -> resize(root.getWidth(),root.getHeight()));
         root.heightProperty().addListener((observable, oldValue, newValue) -> resize(root.getWidth(),root.getHeight()));
-    
-        resLabel.textProperty().bind(Bindings.format("%1$.0fx%2$.0f", root.widthProperty(), root.heightProperty()));
 
         root.getStyleClass().add("root");
     }
@@ -315,7 +313,7 @@ public class RootController implements Initializable{
                 throw new NullPointerException();   
             if(eloDeseado.getValue().elo<2400 && lps>99)
                 throw new LpsInvalidosException();
-            if(game>50)
+            if(game>35)
                 throw new LpsInvalidosException();            
         } catch (NumberFormatException e) {
             errorMessage = "Points per game and Actual points have to be a number";
