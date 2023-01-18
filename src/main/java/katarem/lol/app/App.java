@@ -9,7 +9,7 @@ public class App extends Application{
 
     private RootController r = new RootController();
     @Override public void start(Stage stage) throws Exception {
-        stage.setTitle("LoLPoints by Katarem v1.1");
+        stage.setTitle("LoLPoints by Katarem v1.2");
         stage.setScene(new Scene(r.getView()));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/imgs/logo.png")));
         stage.setMinWidth(891);

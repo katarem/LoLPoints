@@ -7,7 +7,6 @@ import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,7 +29,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import katarem.lol.objs.Divisiones;
 import katarem.lol.objs.Elos;
+import katarem.lol.objs.EqualEloException;
+import katarem.lol.objs.InvalidComparisonException;
 import katarem.lol.objs.LpsInvalidosException;
+import katarem.lol.objs.NullEloException;
 
 public class RootController implements Initializable{
 
@@ -76,7 +78,6 @@ public class RootController implements Initializable{
         //elos:
         eloActual.getItems().addAll(Elos.values());
         eloDeseado.getItems().addAll(Elos.values());
-        eloActual.getItems().remove(Elos.CHALLENGER);
 
         //divisiones:
         divisionActual.getItems().addAll(Divisiones.values());
@@ -84,9 +85,6 @@ public class RootController implements Initializable{
         
         eloDeseado.setOnAction(e -> updateDeseado());
         eloActual.setOnAction(e -> updateActual());
-
-        lpsGame.setOnAction(e -> checkAll());
-        lpActuales.setOnAction(e -> checkAll());
 
         darkIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/dark-icon.png")));
         darkIcon.setFitHeight(32);
@@ -139,11 +137,6 @@ public class RootController implements Initializable{
             }
             
         });
-
-        lpActuales.textProperty().addListener(e -> checkAll());
-        lpsGame.textProperty().addListener(e -> checkAll());
-        eloActual.valueProperty().addListener(e -> checkAll());
-        eloDeseado.valueProperty().addListener(e -> checkAll());
 
         root.widthProperty().addListener((observable, oldValue, newValue) -> resize(root.getWidth(),root.getHeight()));
         root.heightProperty().addListener((observable, oldValue, newValue) -> resize(root.getWidth(),root.getHeight()));
@@ -256,19 +249,21 @@ public class RootController implements Initializable{
         else{
             int lpsActuales = eloActual.getValue().elo;
             int lpsDeseados = eloDeseado.getValue().elo;
-            int eloDiff = ((lpsDeseados - lpsActuales) / 400)*3;
-            System.out.println(eloDiff);
+            double eloDiff = 0;
+            if(eloActual.getValue().elo<2400)
+                eloDiff = Math.floor(((lpsDeseados - lpsActuales) / 400)*3);
             if(!lpActuales.getText().isEmpty())
                 lpsActuales+=Integer.parseInt(lpActuales.getText());
             if(!divisionActual.isDisabled())
                 lpsActuales+=divisionActual.getValue().div;
             if(!divisionDeseada.isDisabled())
                 lpsDeseados+=divisionDeseada.getValue().div;
-            
 
-            long winsSinPromo = Math.round((double)(lpsDeseados - lpsActuales) / Double.parseDouble(lpsGame.getText()));
-            long winsTotales = winsSinPromo + eloDiff;
+            double winsSinPromo = Math.ceil((double)(lpsDeseados - lpsActuales) / Double.parseDouble(lpsGame.getText()));
+            if(eloDiff>0)
+                winsSinPromo += eloDiff;
 
+            int winsTotales = (int)winsSinPromo;
 
             checkText.setText("Successful Operation");
             checkText.setFill(Color.GREEN);
@@ -295,22 +290,26 @@ public class RootController implements Initializable{
         }
     }
 
-    private void checkAll(){
-        if(eloActual.getValue()!=null && eloDeseado.getValue()!=null && lpActuales.getText()!=null && lpsGame.getText()!=null){
-            boton.setDisable(false);
-        }
-    }
-
     private boolean errorCheck(){
         try {
+            if(eloActual.getValue()==null || eloDeseado.getValue()==null)
+                throw new NullEloException();
             int lps = Integer.parseInt(lpActuales.getText());
             int game = Integer.parseInt(lpsGame.getText());
-            if(game==0 || lpsGame.getText()==null)
+            if(lps<0)
+                throw new ArithmeticException();
+            if(game<1 || lpsGame.getText()==null)
                 throw new ArithmeticException();
             if(eloActual.getValue().elo<2400 && (divisionActual.getValue()==null))
                 throw new NullPointerException();     
             if(eloDeseado.getValue().elo<2400 && (divisionDeseada.getValue()==null))
-                throw new NullPointerException();   
+                throw new NullPointerException();
+            if(eloDeseado.getValue()==eloActual.getValue() && divisionActual.getValue()==divisionDeseada.getValue() && eloDeseado.getValue()!=Elos.CHALLENGER)
+                throw new EqualEloException();
+            if(eloDeseado.getValue().elo<eloActual.getValue().elo)
+                throw new InvalidComparisonException();
+            if(divisionActual.getValue().div>divisionDeseada.getValue().div)
+                throw new InvalidComparisonException();   
             if(eloDeseado.getValue().elo<2400 && lps>99)
                 throw new LpsInvalidosException();
             if(game>35)
@@ -322,10 +321,20 @@ public class RootController implements Initializable{
             errorMessage = "Division can't be null in elos below master";
             return true;
         } catch (LpsInvalidosException e) {
-            errorMessage = "Points per game is too high!";
+            errorMessage = "Points per game or/and Actual Points are too high!";
             return true;
         } catch(ArithmeticException e) {
-            errorMessage = "Points per game can't be 0 or null";
+            errorMessage = "Points per game and Actual Points can't be less than 1 or null";
+            return true;
+        } catch (InvalidComparisonException e) {
+            errorMessage = "Your actual elo and division can't be higher than the wished one";
+            return true;
+        } catch (EqualEloException e) {
+            errorMessage = "The difference between elos have to be of 1 division at least";
+            return true;
+        } catch (NullEloException e) {
+            errorMessage = "Both elos can't be null";
+            return true;
         }
             return false;
     }

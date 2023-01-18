@@ -59,7 +59,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="boton" disable="true" mnemonicParsing="false" onAction="#calcularWins" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;" text="CALCULATE" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+      <Button fx:id="boton" alignment="CENTER" mnemonicParsing="false" onAction="#calcularWins" prefHeight="70.0" prefWidth="250.0" style="-fx-background-color: yellow; -fx-border-color: black; -fx-border-width: 2px; -fx-border-style: solid;" text="CALCULATE" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
          <font>
             <Font size="35.0" />
          </font>
