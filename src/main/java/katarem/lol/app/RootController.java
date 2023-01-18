@@ -300,17 +300,21 @@ public class RootController implements Initializable{
                 throw new ArithmeticException();
             if(game<1 || lpsGame.getText()==null)
                 throw new ArithmeticException();
-            if(eloActual.getValue().elo<2400 && (divisionActual.getValue()==null))
+
+            boolean actualHighElo = eloActual.getValue().elo>=2400?true:false;
+            boolean wishedHighElo = eloDeseado.getValue().elo>=2400?true:false;
+
+            if(!actualHighElo && divisionActual.isDisabled()==false &&(divisionActual.getValue()==null))
                 throw new NullPointerException();     
-            if(eloDeseado.getValue().elo<2400 && (divisionDeseada.getValue()==null))
+            if(!wishedHighElo && divisionDeseada.isDisabled()==false &&(divisionDeseada.getValue()==null))
                 throw new NullPointerException();
             if(eloDeseado.getValue()==eloActual.getValue() && divisionActual.getValue()==divisionDeseada.getValue() && eloDeseado.getValue()!=Elos.CHALLENGER)
                 throw new EqualEloException();
             if(eloDeseado.getValue().elo<eloActual.getValue().elo)
                 throw new InvalidComparisonException();
-            if(divisionActual.getValue().div>divisionDeseada.getValue().div)
+            if((!actualHighElo && !wishedHighElo) && divisionActual.getValue().div>divisionDeseada.getValue().div)
                 throw new InvalidComparisonException();   
-            if(eloDeseado.getValue().elo<2400 && lps>99)
+            if(!actualHighElo && lps>99)
                 throw new LpsInvalidosException();
             if(game>35)
                 throw new LpsInvalidosException();            
